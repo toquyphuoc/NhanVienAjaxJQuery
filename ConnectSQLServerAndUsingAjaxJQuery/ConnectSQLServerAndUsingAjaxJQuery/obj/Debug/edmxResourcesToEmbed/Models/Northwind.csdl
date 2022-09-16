@@ -1,0 +1,596 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NorthwindModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <ComplexType Name="DSDonHangCuaKhachHang_Result">
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="CustomerID" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="EmployeeID" Type="Int32" />
+    <Property Name="OrderDate" Type="DateTime" />
+    <Property Name="RequiredDate" Type="DateTime" />
+    <Property Name="ShippedDate" Type="DateTime" />
+    <Property Name="ShipVia" Type="Int32" />
+    <Property Name="Freight" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="ShipName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="ShipAddress" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="ShipCity" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="ShipRegion" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="ShipPostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="ShipCountry" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+  </ComplexType>
+  <ComplexType Name="DSDonHangCuaQuocGiaKhachHang1_Result">
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="CustomerID" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="EmployeeID" Type="Int32" />
+    <Property Name="OrderDate" Type="DateTime" />
+    <Property Name="RequiredDate" Type="DateTime" />
+    <Property Name="ShippedDate" Type="DateTime" />
+    <Property Name="ShipVia" Type="Int32" />
+    <Property Name="Freight" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="ShipName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="ShipAddress" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="ShipCity" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="ShipRegion" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="ShipPostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="ShipCountry" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+  </ComplexType>
+  <ComplexType Name="DSDonHangCuaQuocGiaKhachHang2_Result">
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="NgayThang" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="TongSoTien" Type="Double" />
+  </ComplexType>
+  <ComplexType Name="DSHangHoaCuaKhachHang1_Result">
+    <Property Name="ProductID" Type="Int32" Nullable="false" />
+    <Property Name="ProductName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Tong_So_Luong" Type="Int32" />
+  </ComplexType>
+  <ComplexType Name="DSHangHoaCuaKhachHang2_Result">
+    <Property Name="ProductID" Type="Int32" />
+    <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TongSoLuong" Type="Int32" />
+  </ComplexType>
+  <ComplexType Name="fn_DonHangNhanVien_Result">
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="sl" Type="Int32" />
+    <Property Name="ThanhTien" Type="Double" />
+  </ComplexType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="Int32" Nullable="false" />
+    <Property Name="CategoryName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Picture" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_Products_Categories" FromRole="Categories" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CompanyName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContactName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="ContactTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Region" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="PostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+    <Property Name="Fax" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Customers1" FromRole="Customers" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+    </Key>
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="TitleOfCourtesy" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="BirthDate" Type="DateTime" Precision="3" />
+    <Property Name="HireDate" Type="DateTime" Precision="3" />
+    <Property Name="Address" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Region" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="PostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="HomePhone" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+    <Property Name="Extension" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="Photo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ReportsTo" Type="Int32" />
+    <Property Name="GroupID" Type="Int32" />
+    <NavigationProperty Name="Group" Relationship="Self.FK_Employees_Groups" FromRole="Employees" ToRole="Groups" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Employees1" FromRole="Employees" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="Group">
+    <Key>
+      <PropertyRef Name="GroupID" />
+    </Key>
+    <Property Name="GroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Employees" Relationship="Self.FK_Employees_Groups" FromRole="Groups" ToRole="Employees" />
+  </EntityType>
+  <EntityType Name="Order_Detail">
+    <Key>
+      <PropertyRef Name="OrderID" />
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="ProductID" Type="Int32" Nullable="false" />
+    <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Quantity" Type="Int16" Nullable="false" />
+    <Property Name="Discount" Type="Single" Nullable="false" />
+    <NavigationProperty Name="Order" Relationship="Self.FK_Order_Details_Orders" FromRole="Order_Details" ToRole="Orders" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_Order_Details_Products" FromRole="Order_Details" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="CustomerID" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="EmployeeID" Type="Int32" />
+    <Property Name="OrderDate" Type="DateTime" Precision="3" />
+    <Property Name="RequiredDate" Type="DateTime" Precision="3" />
+    <Property Name="ShippedDate" Type="DateTime" Precision="3" />
+    <Property Name="ShipVia" Type="Int32" />
+    <Property Name="Freight" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="ShipName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="ShipAddress" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="ShipCity" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="ShipRegion" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="ShipPostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="ShipCountry" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_Orders_Customers1" FromRole="Orders" ToRole="Customers" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK_Orders_Employees1" FromRole="Orders" ToRole="Employees" />
+    <NavigationProperty Name="Order_Details" Relationship="Self.FK_Order_Details_Orders" FromRole="Orders" ToRole="Order_Details" />
+    <NavigationProperty Name="Shipper" Relationship="Self.FK_Orders_Shippers" FromRole="Orders" ToRole="Shippers" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="Int32" Nullable="false" />
+    <Property Name="ProductName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SupplierID" Type="Int32" />
+    <Property Name="CategoryID" Type="Int32" />
+    <Property Name="QuantityPerUnit" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="UnitsInStock" Type="Int16" />
+    <Property Name="UnitsOnOrder" Type="Int16" />
+    <Property Name="ReorderLevel" Type="Int16" />
+    <Property Name="Discontinued" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Category" Relationship="Self.FK_Products_Categories" FromRole="Products" ToRole="Categories" />
+    <NavigationProperty Name="Order_Details" Relationship="Self.FK_Order_Details_Products" FromRole="Products" ToRole="Order_Details" />
+    <NavigationProperty Name="Supplier" Relationship="Self.FK_Products_Suppliers" FromRole="Products" ToRole="Suppliers" />
+  </EntityType>
+  <EntityType Name="Shipper">
+    <Key>
+      <PropertyRef Name="ShipperID" />
+    </Key>
+    <Property Name="ShipperID" Type="Int32" Nullable="false" />
+    <Property Name="CompanyName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Shippers" FromRole="Shippers" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="Supplier">
+    <Key>
+      <PropertyRef Name="SupplierID" />
+    </Key>
+    <Property Name="SupplierID" Type="Int32" Nullable="false" />
+    <Property Name="CompanyName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContactName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="ContactTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Region" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="PostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+    <Property Name="Fax" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+    <Property Name="HomePage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_Products_Suppliers" FromRole="Suppliers" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="CacKhachHangMy">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+      <PropertyRef Name="CompanyName" />
+    </Key>
+    <Property Name="CustomerID" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CompanyName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContactName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="ContactTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Region" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="PostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+    <Property Name="Fax" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="NamNhanVienGioi">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+    <Property Name="sldn" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="31" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tim10khachhang">
+    <Key>
+      <PropertyRef Name="CompanyName" />
+    </Key>
+    <Property Name="CustomerID" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="CompanyName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Dia_chi" Type="String" MaxLength="92" FixedLength="false" Unicode="true" />
+    <Property Name="Total_Orders" Type="Int32" />
+  </EntityType>
+  <Association Name="FK_Products_Categories">
+    <End Role="Categories" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Products" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Customers1">
+    <End Role="Customers" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employees_Groups">
+    <End Role="Groups" Type="Self.Group" Multiplicity="0..1" />
+    <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Groups">
+        <PropertyRef Name="GroupID" />
+      </Principal>
+      <Dependent Role="Employees">
+        <PropertyRef Name="GroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Employees1">
+    <End Role="Employees" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employees">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Details_Orders">
+    <End Role="Orders" Type="Self.Order" Multiplicity="1" />
+    <End Role="Order_Details" Type="Self.Order_Detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="Order_Details">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Details_Products">
+    <End Role="Products" Type="Self.Product" Multiplicity="1" />
+    <End Role="Order_Details" Type="Self.Order_Detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="Order_Details">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Shippers">
+    <End Role="Shippers" Type="Self.Shipper" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Shippers">
+        <PropertyRef Name="ShipperID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="ShipVia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_Suppliers">
+    <End Role="Suppliers" Type="Self.Supplier" Multiplicity="0..1" />
+    <End Role="Products" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Suppliers">
+        <PropertyRef Name="SupplierID" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="SupplierID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="NorthwindEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="Employees" EntityType="Self.Employee" />
+    <EntitySet Name="Groups" EntityType="Self.Group" />
+    <EntitySet Name="Order_Details" EntityType="Self.Order_Detail" />
+    <EntitySet Name="Orders" EntityType="Self.Order" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="Shippers" EntityType="Self.Shipper" />
+    <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="CacKhachHangMies" EntityType="Self.CacKhachHangMy" />
+    <EntitySet Name="NamNhanVienGiois" EntityType="Self.NamNhanVienGioi" />
+    <EntitySet Name="Tim10khachhang" EntityType="Self.Tim10khachhang" />
+    <AssociationSet Name="FK_Products_Categories" Association="Self.FK_Products_Categories">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Customers1" Association="Self.FK_Orders_Customers1">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employees_Groups" Association="Self.FK_Employees_Groups">
+      <End Role="Groups" EntitySet="Groups" />
+      <End Role="Employees" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Employees1" Association="Self.FK_Orders_Employees1">
+      <End Role="Employees" EntitySet="Employees" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Details_Orders" Association="Self.FK_Order_Details_Orders">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="Order_Details" EntitySet="Order_Details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Details_Products" Association="Self.FK_Order_Details_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Order_Details" EntitySet="Order_Details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Shippers" Association="Self.FK_Orders_Shippers">
+      <End Role="Shippers" EntitySet="Shippers" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_Suppliers" Association="Self.FK_Products_Suppliers">
+      <End Role="Suppliers" EntitySet="Suppliers" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <FunctionImport Name="DSDonHangCuaKhachHang" IsComposable="true" ReturnType="Collection(NorthwindModel.DSDonHangCuaKhachHang_Result)">
+      <Parameter Name="MaKhachHang" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="DSDonHangCuaQuocGiaKhachHang1" IsComposable="true" ReturnType="Collection(NorthwindModel.DSDonHangCuaQuocGiaKhachHang1_Result)">
+      <Parameter Name="TenQuocGia" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="DSDonHangCuaQuocGiaKhachHang2" IsComposable="true" ReturnType="Collection(NorthwindModel.DSDonHangCuaQuocGiaKhachHang2_Result)">
+      <Parameter Name="TenQuocGia" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="DSHangHoaCuaKhachHang1" IsComposable="true" ReturnType="Collection(NorthwindModel.DSHangHoaCuaKhachHang1_Result)">
+      <Parameter Name="MaKhachHang" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="DSHangHoaCuaKhachHang2" IsComposable="true" ReturnType="Collection(NorthwindModel.DSHangHoaCuaKhachHang2_Result)">
+      <Parameter Name="MaKhachHang" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="fn_DonHangNhanVien" IsComposable="true" ReturnType="Collection(NorthwindModel.fn_DonHangNhanVien_Result)">
+      <Parameter Name="MaNV" Mode="In" Type="Int32" />
+      <Parameter Name="Nam" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="DSDonHangTungNhanVien" ReturnType="Collection(NorthwindModel.DSDonHangTungNhanVien_Result)">
+      <Parameter Name="MaNhanVien" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="DSDonHangTungNhanVien2" ReturnType="Collection(NorthwindModel.DSDonHangTungNhanVien2_Result)">
+      <Parameter Name="MaNhanVien" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="DSDonHangTungQuocGia" ReturnType="Collection(NorthwindModel.DSDonHangTungQuocGia_Result)">
+      <Parameter Name="TenQuocGia" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="DSKhachHang" ReturnType="Collection(NorthwindModel.DSKhachHang_Result)">
+      <Parameter Name="TenQuocGia" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GiaiPhuongTrinhBacNhat">
+      <Parameter Name="a" Mode="In" Type="Double" />
+      <Parameter Name="b" Mode="In" Type="Double" />
+      <Parameter Name="kq" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="MaSangThongTin" ReturnType="Collection(NorthwindModel.MaSangThongTin_Result)">
+      <Parameter Name="masanpham" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ProcThemKHMuc1">
+      <Parameter Name="MaKH" Mode="In" Type="String" />
+      <Parameter Name="TenCT" Mode="In" Type="String" />
+      <Parameter Name="ThanhPho" Mode="In" Type="String" />
+      <Parameter Name="QuocGia" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SLKhachHangTungQuocGia" ReturnType="Collection(Int32)">
+      <Parameter Name="TenQuocGia" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SLKhachHangTungQuocGia2">
+      <Parameter Name="TenQuocGia" Mode="In" Type="String" />
+      <Parameter Name="SLKhachHang" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SLKhachHangTungQuocGia3">
+      <Parameter Name="TenQuocGia" Mode="In" Type="String" />
+      <Parameter Name="SLKhachHang" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SLKhachHangTungQuocGia4">
+      <Parameter Name="TenQuocGia" Mode="In" Type="String" />
+      <Parameter Name="SLKhachHang" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_cau1" ReturnType="Collection(NorthwindModel.sp_cau1_Result)" />
+    <FunctionImport Name="sp_cau1_danhmucsp" ReturnType="Collection(NorthwindModel.sp_cau1_danhmucsp_Result)" />
+    <FunctionImport Name="sp_Cau1_DanhMucSPP" ReturnType="Collection(NorthwindModel.sp_Cau1_DanhMucSPP_Result)" />
+    <FunctionImport Name="sp_cau2" ReturnType="Collection(NorthwindModel.sp_cau2_Result)" />
+    <FunctionImport Name="sp_cau3" ReturnType="Collection(NorthwindModel.sp_cau3_Result)">
+      <Parameter Name="MaSP" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_cau4" ReturnType="Collection(NorthwindModel.sp_cau4_Result)">
+      <Parameter Name="NgayBD" Mode="In" Type="DateTime" />
+      <Parameter Name="NgayKT" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(NorthwindModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(NorthwindModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+  <ComplexType Name="DSDonHangTungNhanVien_Result">
+    <Property Type="Int32" Name="OrderID" Nullable="false" />
+    <Property Type="DateTime" Name="OrderDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="EmployeeID" Nullable="false" />
+    <Property Type="Double" Name="TongTienDonHang" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="DSDonHangTungNhanVien2_Result">
+    <Property Type="Int32" Name="OrderID" Nullable="false" />
+    <Property Type="DateTime" Name="OrderDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="EmployeeID" Nullable="false" />
+    <Property Type="Double" Name="TongTienDonHang" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="DSDonHangTungQuocGia_Result">
+    <Property Type="String" Name="Country" Nullable="true" MaxLength="15" />
+    <Property Type="Int32" Name="OrderID" Nullable="false" />
+    <Property Type="String" Name="CustomerID" Nullable="true" MaxLength="5" />
+    <Property Type="Int32" Name="EmployeeID" Nullable="true" />
+    <Property Type="DateTime" Name="OrderDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="RequiredDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="ShippedDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="ShipVia" Nullable="true" />
+    <Property Type="Decimal" Name="Freight" Nullable="true" Precision="19" />
+    <Property Type="String" Name="ShipName" Nullable="true" MaxLength="40" />
+    <Property Type="String" Name="ShipAddress" Nullable="true" MaxLength="60" />
+    <Property Type="String" Name="ShipCity" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="ShipRegion" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="ShipPostalCode" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="ShipCountry" Nullable="true" MaxLength="15" />
+  </ComplexType>
+  <ComplexType Name="DSKhachHang_Result">
+    <Property Type="String" Name="CustomerID" Nullable="false" MaxLength="5" />
+    <Property Type="String" Name="CompanyName" Nullable="false" MaxLength="40" />
+    <Property Type="String" Name="ContactName" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="ContactTitle" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="60" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="Region" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="PostalCode" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="Country" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="Phone" Nullable="true" MaxLength="24" />
+    <Property Type="String" Name="Fax" Nullable="true" MaxLength="24" />
+  </ComplexType>
+  <ComplexType Name="MaSangThongTin_Result">
+    <Property Type="Int32" Name="ProductID" Nullable="false" />
+    <Property Type="String" Name="ProductName" Nullable="false" MaxLength="40" />
+    <Property Type="Int32" Name="SupplierID" Nullable="true" />
+    <Property Type="Int32" Name="CategoryID" Nullable="true" />
+    <Property Type="String" Name="QuantityPerUnit" Nullable="true" MaxLength="20" />
+    <Property Type="Decimal" Name="UnitPrice" Nullable="true" Precision="19" />
+    <Property Type="Int16" Name="UnitsInStock" Nullable="true" />
+    <Property Type="Int16" Name="UnitsOnOrder" Nullable="true" />
+    <Property Type="Int16" Name="ReorderLevel" Nullable="true" />
+    <Property Type="Boolean" Name="Discontinued" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="sp_cau1_Result">
+    <Property Type="Int32" Name="CategoryID" Nullable="false" />
+    <Property Type="String" Name="CategoryName" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="Description" Nullable="true" />
+    <Property Type="Binary" Name="Picture" Nullable="true" MaxLength="Max" />
+  </ComplexType>
+  <ComplexType Name="sp_cau1_danhmucsp_Result">
+    <Property Type="Int32" Name="CategoryID" Nullable="false" />
+    <Property Type="String" Name="CategoryName" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="Description" Nullable="true" />
+    <Property Type="Binary" Name="Picture" Nullable="true" MaxLength="Max" />
+  </ComplexType>
+  <ComplexType Name="sp_Cau1_DanhMucSPP_Result">
+    <Property Type="Int32" Name="CategoryID" Nullable="false" />
+    <Property Type="String" Name="CategoryName" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="Description" Nullable="true" />
+    <Property Type="Binary" Name="Picture" Nullable="true" MaxLength="Max" />
+  </ComplexType>
+  <ComplexType Name="sp_cau2_Result">
+    <Property Type="String" Name="CompanyName" Nullable="false" MaxLength="40" />
+    <Property Type="Int32" Name="sldh" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_cau3_Result">
+    <Property Type="Int32" Name="ProductID" Nullable="false" />
+    <Property Type="String" Name="ProductName" Nullable="false" MaxLength="40" />
+    <Property Type="Int32" Name="SupplierID" Nullable="true" />
+    <Property Type="Int32" Name="CategoryID" Nullable="true" />
+    <Property Type="String" Name="QuantityPerUnit" Nullable="true" MaxLength="20" />
+    <Property Type="Decimal" Name="UnitPrice" Nullable="true" Precision="19" />
+    <Property Type="Int16" Name="UnitsInStock" Nullable="true" />
+    <Property Type="Int16" Name="UnitsOnOrder" Nullable="true" />
+    <Property Type="Int16" Name="ReorderLevel" Nullable="true" />
+    <Property Type="Boolean" Name="Discontinued" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="sp_cau4_Result">
+    <Property Type="Int32" Name="ProductID" Nullable="false" />
+    <Property Type="String" Name="ProductName" Nullable="false" MaxLength="40" />
+    <Property Type="Int32" Name="SupplierID" Nullable="true" />
+    <Property Type="Int32" Name="CategoryID" Nullable="true" />
+    <Property Type="String" Name="QuantityPerUnit" Nullable="true" MaxLength="20" />
+    <Property Type="Decimal" Name="UnitPrice" Nullable="true" Precision="19" />
+    <Property Type="Int16" Name="UnitsInStock" Nullable="true" />
+    <Property Type="Int16" Name="UnitsOnOrder" Nullable="true" />
+    <Property Type="Int16" Name="ReorderLevel" Nullable="true" />
+    <Property Type="Boolean" Name="Discontinued" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>

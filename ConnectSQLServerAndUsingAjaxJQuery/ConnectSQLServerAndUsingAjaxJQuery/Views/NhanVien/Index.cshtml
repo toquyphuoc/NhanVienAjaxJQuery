@@ -1,0 +1,165 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+
+@{
+    ViewBag.Title = "Nhân viên";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/NhanVienController/NhanVienCRUDajax.js"></script>
+<script src="~/Scripts/plugins/mustache.js"></script>
+<script src="~/Scripts/plugins/Cauhinh.js"></script>
+<script src="~/Scripts/bootbox.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
+<script type="text/javascript" src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<h2>Danh sách nhân viên</h2>
+<a href="#addEmployeeModal" id="addUser" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Thêm nhân viên mới</span></a>
+<table class="table">
+    <thead>
+        <tr style="align-items: center">
+            <th>Mã NV</th>
+            <th>Họ</th>
+            <th>Tên</th>
+            <th>Chức vụ</th>
+            <th>Ngày sinh</th>
+            <th>Địa chỉ</th>
+            <th>Thành phố</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody id="Bang">
+    </tbody>
+</table>
+<script id="data-template" type="x-tmpl-mustache">
+    <tr>
+          <td>{{EmployeeID}}</td>
+          <td>{{LastName}}</td>
+          <td>{{FirstName}}</td>
+          <td>{{Title}}</td>
+          <td>{{BirthDate}}</td>
+          <td>{{Address}}</td>
+          <td>{{City}}</td>
+          <td>
+                <button class="btn btn-primary btn-edit" data-id="{{EmployeeID}}">Edit</button>
+                <button class="btn btn-danger btn-delete" data-id="{{EmployeeID}}">Delete</button>
+          </td>
+      </tr>
+
+</script>
+
+<div id="addEmployeeModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Thêm nhân viên</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <form method="post" enctype="multipart/form-data" id="formDangKy">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Họ</label>
+                        <input type="text" class="form-control" id="LastNameA" name="LastName" />
+                    </div>
+                    <div class="form-group">
+                        <label>Tên</label>
+                        <input type="text" class="form-control" id="FirstNameA" name="FirstName" />
+
+                    </div>
+                    <div class="form-group">
+                        <label>Chức vụ</label>
+                        <input type="text" class="form-control" id="TitleA" name="Title" />
+
+                    </div>
+                    <div class="form-group">
+                        <label>Ngày sinh</label>
+                        <input type="date" class="form-control" id="BirthDateA" name="BirthDate" />
+                    </div>
+                    <div class="form-group">
+                        <label>Địa chỉ</label>
+                        <input type="text" class="form-control" id="AddressA" name="Address" />
+                    </div>
+                    <div class="form-group">
+                        <label>Thành phố</label>
+                        <input type="text" class="form-control" name="CityA" id="CityA" />
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                    <input type="button" value="Thêm nhân viên" class="btn btn-success" id='add' />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="editEmployeeModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Sửa nhân viên</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <form method="post" enctype="multipart/form-data" id="formDangKy">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Họ</label>
+                        <input type="text" class="form-control" id="LastNameB" name="LastName" />
+                    </div>
+                    <div class="form-group">
+                        <label>Tên</label>
+                        <input type="text" class="form-control" id="FirstNameB" name="FirstName" />
+
+                    </div>
+                    <div class="form-group">
+                        <label>Chức vụ</label>
+                        <input type="text" class="form-control" id="TitleB" name="Title" />
+
+                    </div>
+                    <div class="form-group">
+                        <label>Ngày sinh</label>
+                        <input type="date" class="form-control" id="BirthDateB" name="BirthDate" />
+                    </div>
+                    <div class="form-group">
+                        <label>Địa chỉ</label>
+                        <input type="text" class="form-control" id="AddressB" name="Address" />
+                    </div>
+                    <div class="form-group">
+                        <label>Thành phố</label>
+                        <input type="text" class="form-control" name="City" id="CityB" />
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                    <input type="button" value="Sửa nhân viên" class="btn btn-success" id="editBtn" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="deleteEmployeeModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h4 class="modal-title">Xóa nhân viên</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn có chắc bạn muốn xóa nhân viên này không?</p>
+                    <p class="text-warning"><small>Hành động này sẽ không thể khôi phục được</small></p>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default" id="cancel" data-dismiss="modal" value="Cancel">
+                    <input type="button" class="btn btn-danger" value="Delete" id="deleteBtn">
+                    <input type="hidden" id="id" name="id" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@*@Html.PagedListPager(Model, i => Url.Action("Index", "EmpSearch",new {i,search=Request.QueryString["search"] }))*@
+

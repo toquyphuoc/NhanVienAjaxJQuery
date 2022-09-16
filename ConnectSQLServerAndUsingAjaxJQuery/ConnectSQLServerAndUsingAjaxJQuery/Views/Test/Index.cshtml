@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link href="~/Views/Shared/Kien.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="main">
+            <span id="labelLogin">Đăng nhập hệ thống</span>
+            <form class="form">
+                <div class="input-icon">
+                    <i class="fa fa-envelope"></i>
+                    <input type="text" placeholder="Tên tài khoản" class="input input-info">
+                </div>
+                <div class="input-icon">
+                    <i class="fa fa-lock"></i>
+                    <input type="text" placeholder="Mật khẩu" class="input input-info">
+                </div>
+                <span><input type="checkbox" /> | <i>Nhớ thông tin đăng nhập</i></span>
+                <input type="submit" value="Đăng nhập" class="form-btn"></input>
+            </form>
+            <span><button id="loginGoogle"><i class="fa fa-google"></i>Đăng nhập bằng Google</button></span>
+        </div>
+    </div>
+</body>
+
+</html>
+
