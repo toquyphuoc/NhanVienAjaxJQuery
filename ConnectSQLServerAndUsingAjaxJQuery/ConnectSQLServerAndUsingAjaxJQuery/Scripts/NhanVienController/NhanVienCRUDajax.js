@@ -106,6 +106,10 @@ var NhanVienController = {
             console.log(name);
             NhanVienController.searchEmployee(name);
         });
+        $('#btnRefresh').off('click').on('click', function () {
+            NhanVienController.loadData();
+            $('#BangSearch').empty();
+        });
         $('.btn-edit').off('click').on('click', function () {
             var id = $(this).data('id');
             console.log(id);
@@ -171,6 +175,7 @@ var NhanVienController = {
                             City: item.City
                         });
                     });
+                    $('#Bang').empty();
                     $('#BangSearch').html(html);
                     NhanVienController.registerEvent();
                 }
@@ -192,6 +197,7 @@ var NhanVienController = {
             success: function (data) {
                 alert("Thành công");
                 NhanVienController.loadData(true);
+                $('#BangSearch').empty();
             },
             error: function () {
                 alert("Thất bại");
@@ -276,6 +282,7 @@ var NhanVienController = {
                 if (response.status == true) {
                     alert("Xóa dữ liệu thành công");
                     NhanVienController.loadData(true);
+                    $('#BangSearch').empty();
                 }
                 
             },

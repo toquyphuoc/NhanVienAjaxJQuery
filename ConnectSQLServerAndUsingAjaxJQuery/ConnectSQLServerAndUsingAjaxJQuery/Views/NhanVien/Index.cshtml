@@ -20,10 +20,12 @@
     </div>
     <div style="margin-left:15px">
         <input type="text" class="form-control" id="params" placeholder="Nhập họ hoặc tên của nhân viên" name="kw">
-        <button id="btnTimKiem" class="btn btn-primary">Tìm nhân viên</button>
+        <div style="display:flex">
+            <button id="btnTimKiem" class="btn btn-primary">Tìm nhân viên</button>
+            <button id="btnRefresh" class="btn btn-defaul">Tải lại trang</button>
+        </div>
     </div>
     <div>
-        @Html.Partial("~/Views/Shared/TimKiemNhanVien.cshtml")
      </div>
 </div>
 <table class="table" id="TableLoadData">
@@ -41,6 +43,7 @@
     </thead>
     <tbody id="Bang">
     </tbody>
+    @Html.Partial("~/Views/Shared/TimKiemNhanVien.cshtml")
 </table>
 <script id="data-template" type="x-tmpl-mustache">
     <tr>
@@ -52,8 +55,8 @@
           <td>{{Address}}</td>
           <td>{{City}}</td>
           <td>
-                <button class="btn btn-primary btn-edit" data-id="{{EmployeeID}}">Edit</button>
-                <button class="btn btn-danger btn-delete" data-id="{{EmployeeID}}">Delete</button>
+                <button class="btn btn-primary btn-edit" data-id="{{EmployeeID}}">Sửa</button>
+                <button class="btn btn-danger btn-delete" data-id="{{EmployeeID}}">Xóa</button>
           </td>
       </tr>
 
