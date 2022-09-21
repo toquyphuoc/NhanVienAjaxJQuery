@@ -1,6 +1,6 @@
 ﻿@using PagedList.Mvc;
 @using PagedList;
-
+@model ConnectSQLServerAndUsingAjaxJQuery.Models.Employee
 @{
     ViewBag.Title = "Nhân viên";
 }
@@ -14,8 +14,19 @@
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
 <script type="text/javascript" src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <h2>Danh sách nhân viên</h2>
-<a href="#addEmployeeModal" id="addUser" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Thêm nhân viên mới</span></a>
-<table class="table">
+<div style="display:flex" class="d-flex">
+    <div>
+    <a href="#addEmployeeModal" id="addUser" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Thêm nhân viên mới</span></a>
+    </div>
+    <div style="margin-left:15px">
+        <input type="text" class="form-control" id="params" placeholder="Nhập họ hoặc tên của nhân viên" name="kw">
+        <button id="btnTimKiem" class="btn btn-primary">Tìm nhân viên</button>
+    </div>
+    <div>
+        @Html.Partial("~/Views/Shared/TimKiemNhanVien.cshtml")
+     </div>
+</div>
+<table class="table" id="TableLoadData">
     <thead>
         <tr style="align-items: center">
             <th>Mã NV</th>
@@ -47,6 +58,9 @@
       </tr>
 
 </script>
+
+
+
 
 <div id="addEmployeeModal" class="modal fade">
     <div class="modal-dialog">

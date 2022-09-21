@@ -100,18 +100,7 @@ namespace ConnectSQLServerAndUsingAjaxJQuery.Controllers
         [HttpPost]
         public JsonResult DeleteEmployee(int id)
         {
-            //var emp = from entity in db.Employees
-            //            where entity.EmployeeID == id
-            //            select new
-            //            {
-            //                EmployeeID = entity.EmployeeID,
-            //                LastName = entity.LastName,
-            //                FirstName = entity.FirstName,
-            //                Title = entity.Title,
-            //                BirthDate = entity.BirthDate,
-            //                Address = entity.Address,
-            //                City = entity.City
-            //            };
+            
             db.Employees.Remove(db.Employees.Find(id));
             try
             {
@@ -129,6 +118,27 @@ namespace ConnectSQLServerAndUsingAjaxJQuery.Controllers
                     message = ex.Message
                 });
             }
+        }
+        [HttpPost]
+        public JsonResult TimKiemNhanVien(string name)
+        {
+            var model = from entity in db.Employees
+                        where entity.FirstName.Contains(name)|| entity.LastName.Contains(name)
+                        select new
+                        {
+                            EmployeeID = entity.EmployeeID,
+                            LastName = entity.LastName,
+                            FirstName = entity.FirstName,
+                            Title = entity.Title,
+                            BirthDate = entity.BirthDate,
+                            Address = entity.Address,
+                            City = entity.City
+                        };
+            return Json(new
+            {
+                data = model,
+                status = true
+            }, JsonRequestBehavior.AllowGet);
         }
 
 

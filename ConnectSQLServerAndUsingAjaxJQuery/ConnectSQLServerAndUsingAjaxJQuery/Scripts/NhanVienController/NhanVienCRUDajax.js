@@ -1,6 +1,4 @@
-﻿
-
-function ConvertJsonDateString(jsonDate) {
+﻿function ConvertJsonDateString(jsonDate) {
     var shortDate = null;
     if (jsonDate) {
         var regex = /-?\d+/;
@@ -101,16 +99,19 @@ var NhanVienController = {
     init: function () {
         NhanVienController.loadData();
         NhanVienController.registerEvent();
-
-
     },
     registerEvent: function () {
+        $('#btnTimKiem').off('click').on('click', function () {
+            var name = $('#params').val();
+            console.log(name);
+            NhanVienController.searchEmployee(name);
+        });
         $('.btn-edit').off('click').on('click', function () {
             var id = $(this).data('id');
             console.log(id);
             $('#editEmployeeModal').modal('show');
             NhanVienController.loadDetailsEmp(id);
-            $('#editEmployeeModal #editBtn').on('click', function () {
+            $('#editEmployeeModal #editBtn').off('click').on('click', function () {
                 var data = JSON.stringify({
                     LastName: $('#editEmployeeModal #LastNameB').val(),
                     FirstName: $('#editEmployeeModal #FirstNameB').val(),
@@ -122,19 +123,16 @@ var NhanVienController = {
                 NhanVienController.updateEmployee(id, data);
                 $('#editEmployeeModal').modal('hide');
             });
-
-        });
-        $('.btn-delete').on('click', function () {
+        });      
+        $('.btn-delete').off('click').on('click', function () {
             var id = $(this).data('id');
             $('#deleteEmployeeModal').modal('show');
             $('#deleteEmployeeModal #deleteBtn').on('click', function () {
                 NhanVienController.deleteEmployee(id);
                 $('#deleteEmployeeModal').modal('hide');
             });
-        
-           
         });
-        $('#addEmployeeModal #add').on('click', function () {
+        $('#addEmployeeModal #add').off('click').on('click', function () {
             var data = JSON.stringify({
                 LastName: $('#addEmployeeModal #LastNameA').val(),
                 FirstName: $('#addEmployeeModal #FirstNameA').val(),
@@ -143,8 +141,46 @@ var NhanVienController = {
                 Address: $('#addEmployeeModal #AddressA').val(),
                 City: $('#addEmployeeModal #CityA').val()
             });
-                NhanVienController.AddEmployee(data);
+            NhanVienController.AddEmployee(data);
         });
+
+    },
+    searchEmployee: function (name) {
+        $.ajax({
+            url: '/NhanVien/TimKiemNhanVien',
+            type: 'POST',
+            dataType: 'json',
+            data: JSON.stringify({
+                name: name
+            }),
+            contentType: 'application/json',
+            success: function (response) {
+                if (response.status) {
+                    var data = response.data;
+                    var html = '';
+                    var template = $('#data-templatesearch').html();
+                    $.each(data, function (i, item) {
+                        var date = ConvertJsonDateString(item.BirthDate);
+                        html += Mustache.render(template, {
+                            EmployeeID: item.EmployeeID,
+                            LastName: item.LastName,
+                            FirstName: item.FirstName,
+                            BirthDate: date,
+                            Title: item.Title,
+                            Address: item.Address,
+                            City: item.City
+                        });
+                    });
+                    $('#BangSearch').html(html);
+                    NhanVienController.registerEvent();
+                }
+                
+
+            },
+            error: function () {
+                alert("Tìm kiếm thất bại");
+            }
+        })
     },
     updateEmployee: function (id,value) {
         $.ajax({
@@ -155,7 +191,7 @@ var NhanVienController = {
             contentType: 'application/json',
             success: function (data) {
                 alert("Thành công");
-
+                NhanVienController.loadData(true);
             },
             error: function () {
                 alert("Thất bại");
@@ -193,7 +229,7 @@ var NhanVienController = {
             contentType: 'application/json',
             success: function (data) {
                 alert("Thành công");
-                
+                NhanVienController.loadData(true);
             },
             error: function () {
                 alert("Thất bại");
@@ -208,7 +244,6 @@ var NhanVienController = {
             success: function (response) {  
                 if (response.status) {
                     var data = response.data;
-
                     var html = '';
                     var template = $('#data-template').html();
                     $.each(data, function (i, item) {
@@ -240,8 +275,7 @@ var NhanVienController = {
             success: function (response) {
                 if (response.status == true) {
                     alert("Xóa dữ liệu thành công");
-
-                    
+                    NhanVienController.loadData(true);
                 }
                 
             },
