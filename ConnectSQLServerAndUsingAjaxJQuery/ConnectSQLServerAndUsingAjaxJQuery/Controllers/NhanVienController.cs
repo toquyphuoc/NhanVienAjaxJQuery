@@ -18,7 +18,7 @@ namespace ConnectSQLServerAndUsingAjaxJQuery.Controllers
             return View();
         }
         [HttpGet]
-        public JsonResult GetNhanVien()
+        public JsonResult GetNhanVien(int page,int pageSize)
         {
             var listNhanVien = from entity in db.Employees
                                select new
@@ -31,9 +31,13 @@ namespace ConnectSQLServerAndUsingAjaxJQuery.Controllers
                                    Address = entity.Address,
                                    City = entity.City
                                };
-            return Json(new {data=listNhanVien,
-                status=true 
-            }, JsonRequestBehavior.AllowGet);
+            var model=listNhanVien.OrderBy(x=>x.EmployeeID).Skip((page - 1) * pageSize).Take(pageSize);
+            int totalRow = listNhanVien.Count();
+            return Json(new {
+                data = model,
+                total = totalRow,
+                status = true
+            }, JsonRequestBehavior.AllowGet) ;
         }
 
         [HttpPost]

@@ -6,17 +6,18 @@
 }
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="~/Scripts/jquery-3.4.1.js"></script>
-<script src="~/Scripts/NhanVienController/NhanVienCRUDajax.js"></script>
-<script src="~/Scripts/plugins/mustache.js"></script>
-<script src="~/Scripts/plugins/Cauhinh.js"></script>
 <script src="~/Scripts/bootbox.min.js"></script>
+<script src="~/Scripts/plugins/jquery.twbsPagination.min.js"></script>
+<script src="~/Scripts/plugins/mustache.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js"></script>
+<script src="~/Scripts/NhanVienController/NhanVienCRUDajax.js"></script>
 
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
 <script type="text/javascript" src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <h2>Danh sách nhân viên</h2>
 <div style="display:flex" class="d-flex">
-    <div>
-    <a href="#addEmployeeModal" id="addUser" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Thêm nhân viên mới</span></a>
+    <div style="display:flex; align-items:center">
+        <a href="#addEmployeeModal" style="height:70px;text-align:center; flex:50%;" id="addUser" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Thêm nhân viên mới</span></a>
     </div>
     <div style="margin-left:15px">
         <input type="text" class="form-control" id="params" placeholder="Nhập họ hoặc tên của nhân viên" name="kw">
@@ -26,7 +27,7 @@
         </div>
     </div>
     <div>
-     </div>
+    </div>
 </div>
 <table class="table" id="TableLoadData">
     <thead>
@@ -45,6 +46,8 @@
     </tbody>
     @Html.Partial("~/Views/Shared/TimKiemNhanVien.cshtml")
 </table>
+<div style="display:flex;justify-content:center" id="pagination" class="pagination">
+</div>
 <script id="data-template" type="x-tmpl-mustache">
     <tr>
           <td>{{EmployeeID}}</td>

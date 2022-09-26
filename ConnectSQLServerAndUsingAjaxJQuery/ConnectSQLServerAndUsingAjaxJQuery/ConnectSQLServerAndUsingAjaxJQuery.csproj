@@ -352,8 +352,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\NhanVienController\NhanVienCRUDajax.js" />
-    <Content Include="Scripts\plugins\Cauhinh.js" />
-    <Content Include="Scripts\plugins\mustache.js" />
+    <Content Include="Scripts\plugins\jquery.twbsPagination.min.js" />
+    <Content Include="Scripts\plugins\mustache.min.js" />
     <Content Include="Views\Shared\Kien.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

@@ -13,6 +13,11 @@
     }
     return shortDate;
 };
+var homeconfig = {
+    pageSize: 5,
+    pageIndex: 1,
+}
+
 //$(document).ready(function () {
 //    $.ajax({
 //        type: "get",
@@ -99,9 +104,39 @@ var NhanVienController = {
     init: function () {
         NhanVienController.loadData();
         NhanVienController.registerEvent();
+        //NhanVienController.pagging();
+    },
+    idEvent: function () {
+        $('.btn-edit').off('click').on('click', function () {
+            var id = $(this).data('id');
+            console.log(id);
+            $('#editEmployeeModal').modal('show');
+            NhanVienController.loadDetailsEmp(id);
+            $('#editEmployeeModal #editBtn').off('click').on('click', function () {
+                var data = JSON.stringify({
+                    LastName: $('#editEmployeeModal #LastNameB').val(),
+                    FirstName: $('#editEmployeeModal #FirstNameB').val(),
+                    Title: $('#editEmployeeModal #TitleB').val(),
+                    BirthDate: $('#editEmployeeModal #BirthDateB').val(),
+                    Address: $('#editEmployeeModal #AddressB').val(),
+                    City: $('#editEmployeeModal #CityB').val()
+                });
+                NhanVienController.updateEmployee(id, data);
+                $('#editEmployeeModal').modal('hide');
+            });
+        });
+        $('.btn-delete').off('click').on('click', function () {
+            var id = $(this).data('id');
+            $('#deleteEmployeeModal').modal('show');
+            $('#deleteEmployeeModal #deleteBtn').on('click', function () {
+                NhanVienController.deleteEmployee(id);
+                $('#deleteEmployeeModal').modal('hide');
+            });
+        });
+
     },
     registerEvent: function () {
-        $('#btnTimKiem').off('click').on('click', function () {
+        $('#btnTimKiem').off('click').off('click').on('click', function () {
             var name = $('#params').val();
             console.log(name);
             NhanVienController.searchEmployee(name);
@@ -136,7 +171,7 @@ var NhanVienController = {
                 $('#deleteEmployeeModal').modal('hide');
             });
         });
-        $('#addEmployeeModal #add').off('click').on('click', function () {
+        $('#addEmployeeModal #add').unbind('click').off('click').on('click', function () {
             var data = JSON.stringify({
                 LastName: $('#addEmployeeModal #LastNameA').val(),
                 FirstName: $('#addEmployeeModal #FirstNameA').val(),
@@ -196,7 +231,7 @@ var NhanVienController = {
             contentType: 'application/json',
             success: function (data) {
                 alert("Thành công");
-                NhanVienController.loadData(true);
+                NhanVienController.loadData();
                 $('#BangSearch').empty();
             },
             error: function () {
@@ -228,24 +263,28 @@ var NhanVienController = {
     },
     AddEmployee: function (data) {
         $.ajax({
-            url: "NhanVien/ThemNhanVien",
+            url: "/NhanVien/ThemNhanVien",
             data: data,
             datatype: 'json',
             type: 'POST',
             contentType: 'application/json',
             success: function (data) {
                 alert("Thành công");
-                NhanVienController.loadData(true);
+                NhanVienController.loadData();
             },
             error: function () {
                 alert("Thất bại");
             }
         });
     },
-    loadData: function () {
+    loadData: function (changePageSize) {
         $.ajax({
             url: '/NhanVien/GetNhanVien',
             type: 'GET',
+            data: {
+                page: homeconfig.pageIndex,
+                pageSize: homeconfig.pageSize
+            },
             dataType: 'json',
             success: function (response) {  
                 if (response.status) {
@@ -265,10 +304,15 @@ var NhanVienController = {
                         });
                     });
                     $('#Bang').html(html);
-                    NhanVienController.registerEvent();
+                    NhanVienController.pagging(response.total, function () {
+                        NhanVienController.loadData();
+                        NhanVienController.registerEvent();
+                    }, changePageSize);
+
                      
                    
-                } 
+                }
+               
             }
 
         })
@@ -281,13 +325,35 @@ var NhanVienController = {
             success: function (response) {
                 if (response.status == true) {
                     alert("Xóa dữ liệu thành công");
-                    NhanVienController.loadData(true);
+                    NhanVienController.loadData();
                     $('#BangSearch').empty();
                 }
                 
             },
             
+        }); 
+    },
+    pagging: function (totalRow, callback,changePageSize) {
+        var totalPage = Math.ceil(totalRow / homeconfig.pageSize);
+        if ($('#pagination a').length === 0 || changePageSize === true) {
+            $('#pagination').empty();
+            $('#pagination').removeData("twbs-pagination");
+            $('#pagination').unbind("page");
+        }
+        NhanVienController.idEvent();
+        $('#pagination').twbsPagination({
+            totalPages: totalPage,
+            first: "Đầu",
+            next: "Tiếp",
+            last: "Cuối",
+            prev: "Trước",
+            visiblePages: 10,
+            onPageClick: function (event, page) {
+                homeconfig.pageIndex = page;
+                setTimeout(callback, 200);
+            }
         });
+        
     },
 }
 NhanVienController.init()
